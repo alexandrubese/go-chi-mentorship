@@ -1,0 +1,18 @@
+# Compile stage
+FROM golang:1.10.1-alpine3.7 AS build-env
+ENV CGO_ENABLED 0
+ADD . /go/src/hello
+RUN apk add --no-cache git
+
+RUN go get gopkg.in/mgo.v2
+#RUN go get github.com/oxequa/realize
+RUN go get github.com/labstack/echo
+RUN env GOOS=linux GOARCH=amd64
+RUN go build -o /server hello
+
+# Final stage
+FROM golang:1.10.1-alpine3.7
+WORKDIR /
+COPY --from=build-env /server /
+RUN chmod a+x /server
+CMD ["/server"]

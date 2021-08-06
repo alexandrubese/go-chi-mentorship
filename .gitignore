@@ -1,0 +1,13 @@
+bin/*
+!bin/.gitkeep
+pkg/*
+!pkg/.gitkeep
+src/*
+!src/.gitkeep
+!src/alexapp.pck.com
+src/github.com
+src/github.com/*
+/src/github.com/*
+/src/gopkg.in/
+/src/gopkg.in/*
+.idea
